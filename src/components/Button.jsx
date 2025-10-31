@@ -1,0 +1,19 @@
+function Button({ onClick, variant = "primary", children }) {
+  const baseStyles =
+    "px-8 py-3.5 rounded-lg font-semibold text-base transition-all duration-200 transform hover:scale-105 active:scale-95 cursor-pointer";
+
+  const variants = {
+    primary:
+      "bg-yellow-300 text-white hover:bg-yellow-400 shadow-lg shadow-yellow-500/30 hover:shadow-xl hover:shadow-yellow-500/40",
+
+    secondary:
+      "bg-slate-700 text-white hover:bg-slate-600 border border-slate-600",
+  };
+  return (
+    <button onClick={onClick} className={`${baseStyles} ${variants[variant]}`}>
+      {children}
+    </button>
+  );
+}
+
+export default Button;
