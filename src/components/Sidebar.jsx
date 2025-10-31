@@ -2,21 +2,45 @@ import { NavLink, Outlet } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <div className="h-screen w-1/2 bg-red-300 flex flex-col pt-20 items-center">
-      <h1 className="text-6xl max-w-3xl font-bold">Locatra.</h1>
-      <div className="flex flex-row gap-2 pt-2">
-        <NavLink to="cities">
-          <div className="bg-gray-400 rounded-md border border-white/55 text-black hover:bg-gray-500 cursor-pointer p-2">
-            Cities
-          </div>
+    <div className="h-screen w-1/3 bg-[#0C2B4E] text-white flex flex-col items-center pt-16 border-r border-white/10 shadow-2xl">
+      {/* Logo / Judul */}
+      <h1 className="text-5xl font-extrabold tracking-wide text-yellow-300 mb-10">
+        Locatra<span className="text-white">.</span>
+      </h1>
+
+      {/* Navigation */}
+      <div className="flex items-center bg-white/10 rounded-lg overflow-hidden border border-white/20">
+        <NavLink
+          to="cities"
+          className={({ isActive }) =>
+            `px-6 py-2 font-semibold transition-all duration-200 ${
+              isActive
+                ? "bg-yellow-300 text-slate-900"
+                : "text-white hover:bg-white/20"
+            }`
+          }
+        >
+          Cities
         </NavLink>
-        <NavLink to="country">
-          <div className="bg-gray-400 rounded-md border border-white/55 text-black hover:bg-gray-500 cursor-pointer p-2">
-            Country
-          </div>
+
+        <NavLink
+          to="country"
+          className={({ isActive }) =>
+            `px-6 py-2 font-semibold transition-all duration-200 ${
+              isActive
+                ? "bg-yellow-300 text-slate-900"
+                : "text-white hover:bg-white/20"
+            }`
+          }
+        >
+          Country
         </NavLink>
       </div>
-      <Outlet />
+
+      {/* Outlet */}
+      <div className="mt-10 w-full flex justify-center">
+        <Outlet />
+      </div>
     </div>
   );
 }
