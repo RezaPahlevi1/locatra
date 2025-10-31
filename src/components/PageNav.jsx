@@ -1,9 +1,10 @@
 import { NavLink, Outlet } from "react-router-dom";
+import Button from "./Button";
 
 function PageNav() {
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/10 border-b border-white/20">
+      <nav className="fixed top-0 left-0 w-full z-50 flex flex-row items-center justify-between px-50 backdrop-blur-md bg-white/10 border-b border-white/20">
         <ul className="flex flex-row justify-center gap-10 p-4 text-lg font-medium text-white">
           <li>
             <NavLink
@@ -42,6 +43,9 @@ function PageNav() {
             </NavLink>
           </li>
         </ul>
+        <NavLink to="app">
+          <Button variant="nav">Login</Button>
+        </NavLink>
       </nav>
 
       <Outlet />
