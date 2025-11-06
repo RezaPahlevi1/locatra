@@ -2,7 +2,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <div className="h-screen w-1/3 bg-[#0C2B4E] text-white flex flex-col items-center pt-16 border-r border-white/10 shadow-2xl">
+    <div className="h-screen w-1/3 bg-[#0C2B4E] text-white flex flex-col items-center pt-2 border-r border-white/10 shadow-2xl">
       {/* Logo / Judul */}
       <h1 className="text-5xl font-extrabold tracking-wide text-yellow-300 mb-10">
         Locatra<span className="text-white">.</span>
@@ -38,7 +38,7 @@ function Sidebar() {
       </div>
 
       {/* Outlet */}
-      <div className="mt-10 w-full flex justify-center">
+      <div className="mt-5 w-full flex-1 overflow-y-auto px-6 pb-6">
         <Outlet />
       </div>
     </div>
