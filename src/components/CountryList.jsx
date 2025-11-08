@@ -1,14 +1,17 @@
+import { useCities } from "../contexts/CitiesContext";
 import CountryItem from "./CountryItem";
 import Spinner from "./Spinner";
 
-function CountryList({ isLoading, cities }) {
+function CountryList() {
+  const { isLoading, cities } = useCities();
+
   if (isLoading)
     return (
       <div className="flex items-center justify-center w-full h-full">
         <Spinner />
       </div>
     );
-
+ 
   if (!cities.length) return <p>Add your city first by clicking on the map.</p>;
 
   const countries = cities.reduce((arr, city) => {

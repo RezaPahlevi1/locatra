@@ -1,7 +1,9 @@
 import { Form, Link } from "react-router-dom";
+import { useCities } from "../contexts/CitiesContext";
 
 function CityItem({ city }) {
   const { cityName, date, emoji, id, position } = city;
+  const { currentCity } = useCities();
   const linkStyle =
     "flex items-center justify-between bg-white/10 border border-white/20 rounded-xl px-5 py-3 hover:bg-white/20 transition-all duration-200 cursor-pointer";
 
@@ -9,7 +11,9 @@ function CityItem({ city }) {
     <li>
       <Link
         to={`${id}?lat=${position.lat}&lng=${position.lng}`}
-        className={linkStyle}
+        className={`${linkStyle} ${
+          id === currentCity.id ? "border border-yellow-300" : ""
+        }`}
       >
         <div className="flex items-center gap-3">
           <span className="text-2xl">{emoji}</span>
