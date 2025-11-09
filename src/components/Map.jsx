@@ -9,11 +9,19 @@ import {
 } from "react-leaflet";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useCities } from "../contexts/CitiesContext";
+import { useGeolocation } from "../hooks/useGeoLocation";
+import Button from "./Button";
 
 function Map() {
   const { cities } = useCities();
   const [searchParams] = useSearchParams();
   const [position, setPosition] = useState([40, 50]);
+  const {
+    isLoading: isLoadingGeo,
+    getPosition: getGeoPosition,
+    position: geoPosition,
+  } = useGeolocation();
+
   const mapLat = searchParams.get("lat");
   const mapLng = searchParams.get("lng");
 
@@ -24,11 +32,23 @@ function Map() {
     [mapLat, mapLng]
   );
 
+  useEffect(
+    function () {
+      if (geoPosition) setPosition([geoPosition.lat, geoPosition.lng]);
+    },
+    [geoPosition]
+  );
+
   return (
     <div
       // onClick={() => navigate("form")}
       className="w-2/3 h-screen bg-green-300"
     >
+      {!geoPosition && (
+        <Button variant="add" onClick={getGeoPosition}>
+          {isLoadingGeo ? "Loading..." : "Use Your Position"}
+        </Button>
+      )}
       <MapContainer
         center={position}
         zoom={13}
