@@ -1,12 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import { useUrlPosition } from "../hooks/useUrlPosition";
+import Spinner from "./Spinner";
 
 function Form() {
   const [cityName, setCityName] = useState("");
+  const [country, setCountry] = useState("");
   const [date, setDate] = useState("");
   const [notes, setNotes] = useState("");
+  const [emoji, setEmoji] = useState("");
+  const [geoCodeError, setGeoCodeError] = useState("");
+  const [lat, lng] = useUrlPosition();
+  const [isLoadingGeo, setIsLoadingGeo] = useState(false);
   const navigate = useNavigate();
+  const BASE_URL = "https://api.bigdatacloud.net/data/reverse-geocode-client";
+
+  useEffect(
+    function () {
+      async function fetchCityData() {
+        try {
+          setIsLoadingGeo(true);
+          setGeoCodeError("");
+
+          const res = await fetch(
+            `${BASE_URL}?latitude=${lat}&longitude=${lng}`
+          );
+          const data = await res.json();
+          console.log(data);
+          setCityName(data.city);
+          setCountry(data.countryName);
+
+          if (!data.countryCode)
+            throw new Error(
+              "That doesn't seem to be a country! Click somewhere else please."
+            );
+        } catch (err) {
+          setGeoCodeError(err.message);
+        } finally {
+          setIsLoadingGeo(false);
+        }
+      }
+      fetchCityData();
+    },
+    [lat, lng]
+  );
+
+  if (isLoadingGeo) return <Spinner />;
+  if (geoCodeError) return <p>{geoCodeError}</p>;
 
   return (
     <div className="w-full h-full flex justify-center items-start overflow-y-auto px-4 py-6">
