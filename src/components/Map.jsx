@@ -49,9 +49,15 @@ function Map() {
           center={position}
           zoom={13}
           scrollWheelZoom={true}
+          maxBounds={[
+            [-90, -180],
+            [90, 180],
+          ]}
+          maxBoundsViscosity={1.0}
           className="w-full h-full"
         >
           <TileLayer
+            noWrap={true}
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />

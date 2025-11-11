@@ -3,9 +3,14 @@ import { useCities } from "../contexts/CitiesContext";
 
 function CityItem({ city }) {
   const { cityName, date, emoji, id, position } = city;
-  const { currentCity } = useCities();
+  const { currentCity, deleteCity } = useCities();
   const linkStyle =
     "flex items-center justify-between bg-white/10 border border-white/20 rounded-xl px-5 py-3 hover:bg-white/20 transition-all duration-200 cursor-pointer";
+
+  function handleClick(e) {
+    e.preventDefault();
+    deleteCity(id);
+  }
 
   return (
     <li>
@@ -30,6 +35,7 @@ function CityItem({ city }) {
         <button
           className="text-red-400 hover:text-red-500 bg-white/10 hover:bg-white/20 px-2 py-1 rounded-lg text-sm transition-colors"
           title="Delete"
+          onClick={handleClick}
         >
           ✕
         </button>
