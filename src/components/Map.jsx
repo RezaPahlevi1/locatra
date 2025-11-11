@@ -13,6 +13,7 @@ import { useGeolocation } from "../hooks/useGeoLocation";
 import Button from "./Button";
 import "leaflet/dist/leaflet.css";
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import User from "./User";
 
 function Map() {
   const { cities } = useCities();
@@ -34,15 +35,9 @@ function Map() {
 
   return (
     <div className="w-2/3 h-screen flex flex-col bg-[#0C2B4E] relative">
-      {/* Tombol di atas map */}
-      {!geoPosition && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-1000">
-          <Button variant="add" onClick={getGeoPosition}>
-            {isLoadingGeo ? "Loading..." : "Use Your Position"}
-          </Button>
-        </div>
-      )}
-
+      <div className="absolute top-4 right-4 z-1000">
+        <User />
+      </div>
       {/* Map harus fleksibel isi sisa ruang */}
       <div className="flex-1 w-full">
         <MapContainer
@@ -75,6 +70,13 @@ function Map() {
           <DetectClick />
         </MapContainer>
       </div>
+      {!geoPosition && (
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-1000">
+          <Button variant="add" onClick={getGeoPosition}>
+            {isLoadingGeo ? "Loading..." : "Use Your Position"}
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

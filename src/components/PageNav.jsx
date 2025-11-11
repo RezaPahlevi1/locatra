@@ -43,7 +43,7 @@ function PageNav() {
             </NavLink>
           </li>
         </ul>
-        <NavLink to="app">
+        <NavLink to="/login">
           <Button variant="nav">Login</Button>
         </NavLink>
       </nav>
